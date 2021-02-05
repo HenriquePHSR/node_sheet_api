@@ -1,0 +1,22 @@
+{
+  "name": "node_sheet_api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/HenriquePHSR/node_sheet_api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HenriquePHSR/node_sheet_api/issues"
+  },
+  "homepage": "https://github.com/HenriquePHSR/node_sheet_api#readme",
+  "dependencies": {
+    "googleapis": "^67.0.0"
+  }
+}
