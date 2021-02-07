@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="main.js"></script>
+    <meta charset="UTF-8">
+    <title>javascript workspace</title>
+</head>
+
+<body>
+
+    <p>Click the button to check your CPF number.</p>
+    <p>CPF: <input type="text" id="cpf" value="13720271730"></p>
+    <button onclick="myFunction()">check</button>
+
+    <p> <span id="result"></span></p>
+
+    <script>
+        function httpGet(theUrl) {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("GET", theUrl, false); // false for synchronous request
+            xmlHttp.send(null);
+            return xmlHttp.responseText;
+        }
+
+        //async function myFunction() {
+        //    let cpf = document.getElementById("cpf").value;
+        //    document.getElementById("demo").innerHTML = await httpGet('http://localhost:8080/api/?cpf=*' + cpf);
+        //}
+
+        // two constructions here with promise.then() or a async function 
+        // with await
+        async function myFunction() {
+            let cpf = document.getElementById("cpf").value;
+            // if is a POST method then we need to fill body and headers fields
+            const options = {
+                method: 'GET',
+                //headers: {
+                //    'Content-Type': 'application/json'
+                //},
+                //body: JSON.stringify({ cpf })
+            };
+
+            //with promise
+            //fetch('/api', options).then(response => {
+            //    console.log(response);
+            //});
+
+            const response = await fetch('/api/?cpf='+cpf, options);
+            const json = await response.json();
+            //console.log(json.cpf);
+            //console.log(json.cpf.find(x => x == cpf));
+            if (json.cpf.find(x => x == cpf) != undefined) {
+                document.getElementById("result").innerHTML = '<a href="/pass">continue</a>';
+            } else {
+                document.getElementById("result").innerHTML = '<a href="https://forms.gle/XeaVe3yMcgVErEyz6">preencha o formulário</a>';
+            }
+        }
+    </script>
+</body>
+</html>

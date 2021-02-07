@@ -1,8 +1,10 @@
 FROM node
 
-RUN apt-get update
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y sudo && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* 
 
-RUN nvm install latest
-RUN nvm use latest
-RUN npm init
-RUN npm install googleapis@39 --save
+COPY . /usr/src/app
+WORKDIR /usr/src/app
+
+ENTRYPOINT node exp_server
