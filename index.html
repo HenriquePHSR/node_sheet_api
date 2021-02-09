@@ -49,7 +49,7 @@
             const json = await response.json();
             //console.log(json.cpf);
             //console.log(json.cpf.find(x => x == cpf));
-            if (json.cpf.find(x => x == cpf) != undefined) {
+            if (json.cpf != undefined) {
                 document.getElementById("result").innerHTML = '<a href="/pass">continue</a>';
             } else {
                 document.getElementById("result").innerHTML = '<a href="https://forms.gle/XeaVe3yMcgVErEyz6">preencha o formulário</a>';

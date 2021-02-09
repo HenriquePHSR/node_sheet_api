@@ -9,7 +9,7 @@ const path = require('path');
 const router = express.Router();
 const config = {
 	spreadsheetId: '1m4Kcczk3JABIb2A_0HCnW4j1A5NUn2eRSszQrkympTg',
-	range: 'B1:B100'
+	range: 'B:B'
 };
 
 /*
@@ -50,7 +50,7 @@ async function queryCPF(cpf) {
 	};
 	let sheet = await gsapi.spreadsheets.values.get(opt);
 	let sheet_values = await sheet.data.values;
-	return await sheet_values;
+	return await sheet_values.slice(1,);
 	// return await sheet_values.find(x => x == cpf);
 }
 
@@ -95,11 +95,11 @@ server.post('/api',async (request, response) => {
 server.get('/api', (request, response) => {
 	var q = url.parse(request.url, true).query;
 	var cpf = q.cpf;
-	let query = queryCPF(cpf);
+	let query = queryCPF(cpf); // a promise object use .then() and/or .catch() solve it. .catch for errors 
 	query.then(resolve => {
 		response.json({
 			status: 'success',
-			cpf: resolve
+			cpf: resolve.find(x => x == cpf)
 		});
 	})
 });

@@ -4,8 +4,9 @@
     "\\assets",
     "\\assets\\css",
     "\\assets\\js",
-    "\\static"
+    "\\static",
+    "\\temp"
   ],
-  "SelectedNode": "\\exp_server.js",
+  "SelectedNode": "\\server.js",
   "PreviewInSolutionExplorer": false
 }
