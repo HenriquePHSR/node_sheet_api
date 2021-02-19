@@ -4,14 +4,19 @@ const express = require('express');
 const url = require('url');
 const { google } = require('googleapis');
 const server = express();
-const creds = require('./creds/node-303718-5b8958132dcc.json');
+//const creds = require('./creds/node-303718-5b8958132dcc.json');
 const path = require('path');
 const router = express.Router();
+
+// ENV
+require('dotenv').config();
+
+const creds = JSON.parse(process.env.API_CREDS);
+const port = process.env.PORT || Number(process.env.MY_PORT) || 6000;
 const config = {
 	spreadsheetId: '1m4Kcczk3JABIb2A_0HCnW4j1A5NUn2eRSszQrkympTg',
 	range: 'B:B'
 };
-
 /*
  * DATA LIMITS:
  * This version of the Google Sheets API has a limit of 500 requests per 100 seconds per project, and 100 requests per 100 seconds per user. Limits for reads and writes 
@@ -58,9 +63,9 @@ function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-let port = 8080;
+
 server.listen(port, () => {
-    console.log('listening in port ' + String(port));
+    console.log(`listening in port ${port}`);
 });
 
 router.get('/', function (req, res) {
@@ -69,7 +74,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/pass', function (req, res) {
-	res.sendFile(path.join(__dirname + '/pass.html'));
+	res.sendFile(path.join(__dirname + '/static/pass.html'));
 });
 
 //server.use(express.static('static'));
@@ -103,5 +108,3 @@ server.get('/api', (request, response) => {
 		});
 	})
 });
-
-

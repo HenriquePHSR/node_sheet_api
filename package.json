@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/HenriquePHSR/node_sheet_api#readme",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "googleapis": "^67.0.0"
   }
